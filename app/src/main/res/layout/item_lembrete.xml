@@ -5,9 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/constraintLayout">
+    android:id="@+id/constraintLayout"
+    android:background="@drawable/each_element"
+    android:layout_marginBottom="4dp">
 
     <TextView
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:id="@+id/textView"
         android:layout_width="206dp"
         android:layout_height="23dp"
@@ -27,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/edit_hora"
         android:layout_width="73dp"
         android:layout_height="43dp"
@@ -35,6 +39,8 @@
         android:ems="10"
         android:hint="20:30"
         android:inputType="time"
+        android:textColor="@color/black70"
+        android:textColorHint="@color/black70"
         android:lines="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +49,15 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_data"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
+    <TextView
         android:id="@+id/edit_data"
         android:layout_width="109dp"
         android:layout_height="43dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:ems="10"
+        android:textColor="@color/black70"
+        android:textColorHint="@color/black70"
         android:hint="21/10/2000"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"

@@ -36,14 +36,11 @@ class PreferenciaLembrete(private val context: Context) {
         editor.commit()
     }
 
-
-
     fun RecuperarLembrete(): List<String>{
         val notas = preferences.getString(CHAVE, "")
         val lista = notas?.split(";")
         return lista ?: ArrayList<String>()
     }
-
 
     init{
         preferences = context.getSharedPreferences(ARQUIVO, 0)

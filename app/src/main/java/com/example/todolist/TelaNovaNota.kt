@@ -1,17 +1,17 @@
 package com.example.todolist
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.todolist.databinding.ActivityNovaNotaBinding
-import kotlin.system.measureNanoTime
 
 class TelaNovaNota : AppCompatActivity() {
     private lateinit var binding: ActivityNovaNotaBinding
 
-    private var nota: String? = null
+    private var lembrete: String? = null
+    private var data: String? = null
+    private var hora: String? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +27,15 @@ class TelaNovaNota : AppCompatActivity() {
 
 
         val preferencia = PreferenciaLembrete(applicationContext)
+        val preferenciaNota = PreferenciaData(applicationContext) //aqui
+        val preferenciaHora = PreferenciaHora(applicationContext)
         val botaoSalvar = binding.floatingActionButton
+
 
         botaoSalvar.setOnClickListener {
             val lembreteRecuperado = binding.editContainer.editAnotacao.text.toString()
+            val dataRecuperado = binding.editContainer.editData.text.toString() //aqui
+            val horaRecuperada = binding.editContainer.editHora.text.toString()
             val posicao = intent.getIntExtra("posicao", -1)
 
             if(lembreteRecuperado == "")
@@ -40,23 +45,33 @@ class TelaNovaNota : AppCompatActivity() {
             }else if(posicao == -1)
             {
                 preferencia.adicionarLembrete((lembreteRecuperado))
+                preferenciaNota.adicionarData((dataRecuperado)) //aqui
+                preferenciaHora.adicionarHora((horaRecuperada))
                 Toast.makeText(this,"Anotação Salva com Sucesso!", Toast.LENGTH_SHORT).show()
                 finish()
             }else if(posicao >= 0)
             {
                 preferencia.editarLembrete(lembreteRecuperado,posicao)
+                preferenciaNota.editarData(dataRecuperado,posicao) // aqui
+                preferenciaHora.editarHora(horaRecuperada,posicao)
                 Toast.makeText(this,"Anotacao salva com sucesso!", Toast.LENGTH_SHORT).show()
                 finish()
             }
-
         }
 
-        nota = intent.getStringExtra("notas")
+        lembrete = intent.getStringExtra("lembretes")
+        data = intent.getStringExtra("datas")
+        hora = intent.getStringExtra("horas")
 
-        if(nota != null)
+        if(lembrete != null)
         {
-            binding.editContainer.editAnotacao.setText(nota)
+            binding.editContainer.editAnotacao.setText(lembrete)
+            binding.editContainer.editData.setText(data)
+            binding.editContainer.editHora.setText(hora)
         }
+
+
+
 
     }
 }
